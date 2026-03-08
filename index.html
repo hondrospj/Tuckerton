@@ -1304,9 +1304,9 @@ const DATUMS = ["MLLW", "NAVD88", "MSL", "MHHW"]; // cycle order
 // From  table (Gauge Zero row): datum = MLLW + offset
 const OFFSET_FROM_MLLW = {
   MLLW:   0.00,
-  NAVD88: -3.27,
-  MSL:    -3.15,
-  MHHW:   -6.43
+  NAVD88: -1.84,
+  MSL:    -1.59,
+  MHHW:   -3.42
 };
 
 function mllwToDatum(ft, datum){
@@ -1339,35 +1339,28 @@ function fromDisplayToNavd(displayFt){
   return datumToDatum(displayFt, DISPLAY_DATUM, "NAVD88");
 }
 
-
 /* =========================================
-   1) Cohancey River at Greenwich
+   13) Little Egg Inlet at Tuckerton
 ========================================= */
 
-/* USGS observed (15-min IV). */
-const USGS_SITE="01413038";
-
-/* Water level ONLY (tide elevation NAVD88). */
+const USGS_SITE="01409335";
 const USGS_PARAM_PRIMARY = "72279";
 
-/* NOAA CO-OPS predictions */
-const COOPS_STATION="8537374";
+const COOPS_STATION="8534139";
 const COOPS_APP="cupajoe.live";
 const COOPS_DATUM="MLLW";
 const COOPS_INTERVAL="6";
 const COOPS_TZ="gmt";
 
-/* Tide-clock settings for crest-anchored highs (NOAA hilo predictions) */
-const NOAA_STATION_TIDECLOCK = "8537374";
+const NOAA_STATION_TIDECLOCK = "8534139";
 const CREST_WINDOW_HOURS = 2;
 const REQUIRE_WITHIN_HOURS = 1;
 
-/* Flood thresholds */
 const THRESH = {
-  MLLW:  { minorLow:7.20, moderateLow:8.20, majorLow:9.20 },
-  NAVD88:{ minorLow:3.93, moderateLow:4.93, majorLow:5.93 },
-  MSL:   { minorLow:4.05, moderateLow:5.05, majorLow:6.05 },
-  MHHW:  { minorLow:0.77, moderateLow:1.77, majorLow:2.77 }
+  MLLW:  { minorLow:4.40, moderateLow:5.40, majorLow:6.40 },
+  NAVD88:{ minorLow:2.56, moderateLow:3.56, majorLow:4.56 },
+  MSL:   { minorLow:2.81, moderateLow:3.81, majorLow:4.81 },
+  MHHW:  { minorLow:0.98, moderateLow:1.98, majorLow:2.98 }
 };
 
       const HOUR_MS = 60 * 60 * 1000;
