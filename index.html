@@ -2250,11 +2250,11 @@ async function fetchObservedSeries({startISO=null,endISO=null,period=null}={}){
 }
 
 /* =========================
-NOAA/NWS NWPS official forecast (GRWN4) -> we resample to 15-min later
+NOAA/NWS NWPS official forecast (SBTN4) -> we resample to 15-min later
 Replaces CO-OPS predictions block.
 Returns MLLW ft as [{t: ISO8601, ft: Number}] plus issuedTime for UI.
 ========================= */
-const NWPS_GAUGE = "GRWN4";
+const NWPS_GAUGE = "SBTN4";
 const NWPS_STAGEFLOW_URL = `https://api.water.noaa.gov/nwps/v1/gauges/${NWPS_GAUGE}/stageflow`;
 
 /* Clip to N hours from the first point (keeps  existing 72h logic consistent). */
