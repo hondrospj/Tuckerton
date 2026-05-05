@@ -10,13 +10,14 @@ on:
         description: "Optional: backfill to year (e.g., 2026)"
         required: false
   schedule:
-    - cron: "17 8 * * *"  # once per day at 08:17 UTC
+    # Once per day at 7:20 AM UTC
+    - cron: "20 7 * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: peaks-cache
+  group: peaks-cache-tuckerton
   cancel-in-progress: true
 
 jobs:
@@ -36,7 +37,6 @@ jobs:
       - name: Run updater
         run: |
           set -euo pipefail
-
           BACKFILL_FROM="${{ github.event.inputs.backfill_from || '' }}"
           BACKFILL_TO="${{ github.event.inputs.backfill_to || '' }}"
 
@@ -49,17 +49,13 @@ jobs:
       - name: Commit & push if changed
         run: |
           set -euo pipefail
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git add data/peaks_navd88.json
-
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0
           fi
-
           git commit -m "Update peaks cache"
           git pull --rebase
           git push
